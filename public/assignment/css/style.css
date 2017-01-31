@@ -32,6 +32,13 @@ body {
     margin-left:0px;
 }
 
+.no-right-margin{
+    margin-right:0px;
+}
+.no-right-padding{
+    padding-right:0px;
+}
+
 .right-border{
     border-right:1px;
 }
@@ -39,3 +46,19 @@ body {
 a:hover{
     text-decoration: none;
 }
+
+.navbar-brand:hover{
+    text-decoration: none;
+}
+
+.extra-top-padding{
+    padding-top:35px;
+}
+
+.side-border{
+    border-right:solid;
+    height:100%;
+    overflow-y:hidden;
+    color:#dddddd;
+}
+
