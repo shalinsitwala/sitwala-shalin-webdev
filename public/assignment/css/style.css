@@ -4,4 +4,38 @@ input.form-control {
 
 body {
     padding-top: 36px;
+    padding-bottom: 55px;
+}
+
+.glyphicon{
+    color:white;
+}
+
+.glyphicon-cog{
+    color:#428bca;
+}
+
+.navbar-brand {
+    color:white;
+    font-weight:bold;
+}
+
+.list-group-item{
+    border:none;
+}
+
+.no-left-padding{
+    padding-left:0px;
+}
+
+.no-left-margin{
+    margin-left:0px;
+}
+
+.right-border{
+    border-right:1px;
+}
+
+a:hover{
+    text-decoration: none;
 }
