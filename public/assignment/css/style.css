@@ -47,7 +47,9 @@ body {
 
 a:hover{
     text-decoration: none;
+    color:white;
 }
+
 
 .navbar-brand:hover{
     text-decoration: none;
@@ -65,5 +67,32 @@ a:hover{
 }
 
 .extra-right-padding-setting{
-    padding-right:35px;
+    padding-right:30px;
 }
+
+.relative {
+    position:relative;
+
+}
+.something{
+    display: block;
+}
+.absolute{
+    position:absolute;
+}
+
+.widget-style{
+    z-index:5;
+    padding-bottom:3px;
+    background-color:white;
+    border-bottom-left-radius: 8px;
+    padding-right:0px;
+    opacity:0.9;
+}
+
+.widget-size{
+    width: 47px;
+}
+ .top-gap{
+     padding-top: 5px;
+ }
