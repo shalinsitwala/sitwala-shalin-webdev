@@ -94,5 +94,23 @@ a:hover{
     width: 47px;
 }
  .top-gap{
-     padding-top: 5px;
+     padding-top: 10px;
+ }
+
+ .right-space{
+     padding-right:10px;
+ }
+
+ .remove-top-padding{
+     padding-top: 0px;
+ }
+ .remove-top-margin{
+     margin-top: 0px;
+ }
+
+ .remove-bottom-padding{
+     padding-bottom:0px;
+ }
+ .remove-bottom-margin{
+     margin-bottom:0px;
  }
