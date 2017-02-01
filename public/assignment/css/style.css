@@ -14,7 +14,9 @@ body {
 .glyphicon-cog{
     color:#428bca;
 }
-
+.glyphicon-align-justify{
+    color:black;
+}
 .navbar-brand {
     color:white;
     font-weight:bold;
@@ -62,3 +64,6 @@ a:hover{
     color:#dddddd;
 }
 
+.extra-right-padding-setting{
+    padding-right:35px;
+}
