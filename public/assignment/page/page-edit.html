@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New Website</title>
-    <link href="../css/bootstrap.css" rel="stylesheet">
-    <link href="./css/style.css" rel="stylesheet"/>
+    <title>Edit Page</title>
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=no">
+
 </head>
 <body>
+
 
 <nav class="navbar navbar-fixed-top bg-primary">
     <div class="container-fluid">
@@ -21,7 +23,7 @@
                         <span class="glyphicon glyphicon-plus"></span>
                     </div>
                     <a class="navbar-brand">
-                        Websites
+                        Pages
                     </a>
                 </div>
 
@@ -33,13 +35,15 @@
                     </a>
                 </div>
                 <a class="navbar-brand pull-left">
-                    New Website
+                    Edit Page
                 </a>
             </div>
 
         </div>
     </div>
 </nav>
+
+
 <div class="container-fluid">
     <div class="row">
         <div>
@@ -49,31 +53,20 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-xs-10">
-                                    <a href="#">Address Book App</a>
+                                    <a href="#">Blog Post</a>
                                 </div>
                                 <div class="col-xs-2">
-                                    <a href="#"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+                                    <a href="website-edit.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
                                 </div>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-xs-10">
-                                    <a href="#">Blogger</a>
+                                    <a href="#">Blogs</a>
                                 </div>
                                 <div class="col-xs-2">
-                                    <a href="#"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xs-10">
-                                    <a href="#">Blogging App</a>
-                                </div>
-                                <div class="col-xs-2">
-                                    <a href="#"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+                                    <a href="website-edit.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
                                 </div>
                             </div>
                         </li>
@@ -81,10 +74,32 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-xs-10">
-                                    <a href="#">Script Testing App</a>
+                                    <a href="#">Home</a>
                                 </div>
                                 <div class="col-xs-2">
-                                    <a href="#"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+                                    <a href="website-edit.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <a href="#">About</a>
+                                </div>
+                                <div class="col-xs-2">
+                                    <a href="website-edit.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <a href="#">Contact Us</a>
+                                </div>
+                                <div class="col-xs-2">
+                                    <a href="website-edit.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
                                 </div>
                             </div>
                         </li>
@@ -95,15 +110,17 @@
                 <div class="extra-top-padding">
                     <form>
                         <div class="form-group">
-                            <label for="webName">Name</label>
-                            <input type="text" class="form-control" id="webName" placeholder="Name">
+                            <label for="name">Name</label>
+                            <input type="text" value="Blog Post" class="form-control" id="name" placeholder="Page Name">
                         </div>
 
                         <div class="form-group">
-                            <label for="webDesc">Description</label>
-                            <textarea class="form-control" rows="7" id="webDesc" placeholder="Description"></textarea>
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Page Title">
                         </div>
                     </form>
+                    <a class="btn btn-danger  btn-block"
+                       href="#">Delete</a>  
                 </div>
             </div>
         </div>
@@ -118,5 +135,6 @@
         </div>
     </nav>
 </div>
+
 </body>
 </html>
