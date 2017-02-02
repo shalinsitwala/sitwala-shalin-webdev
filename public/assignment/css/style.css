@@ -47,9 +47,12 @@ body {
 
 a:hover{
     text-decoration: none;
-    color:white;
+    /*color:white;*/
 }
 
+.color-white{
+    color:white;
+}
 
 .navbar-brand:hover{
     text-decoration: none;
