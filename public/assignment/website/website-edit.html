@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New Website</title>
-    <link href="../../css/bootstrap.css" rel="stylesheet">
+    <title>Edit Website</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=no">
 </head>
@@ -14,7 +14,10 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="navbar-text pull-left">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <a href="website-list.html">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+
                 </div>
                 <div class="hidden-sm hidden-xs">
                     <div class="navbar-text pull-right">
@@ -28,7 +31,7 @@
             </div>
             <div class="col-sm-8">
                 <div class="navbar-text pull-right">
-                    <a href="#">
+                    <a href="website-list.html">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </div>
@@ -49,31 +52,20 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-xs-10">
-                                    <a href="#">Address Book App</a>
+                                    <a href="../page/page-list.html">Address Book App</a>
                                 </div>
                                 <div class="col-xs-2">
-                                    <a href="#"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+                                    <a href="website-edit.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
                                 </div>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-xs-10">
-                                    <a href="#">Blogger</a>
+                                    <a href="../page/page-list.html">Blogger</a>
                                 </div>
                                 <div class="col-xs-2">
-                                    <a href="#"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xs-10">
-                                    <a href="#">Blogging App</a>
-                                </div>
-                                <div class="col-xs-2">
-                                    <a href="#"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+                                    <a href="website-edit.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
                                 </div>
                             </div>
                         </li>
@@ -81,10 +73,21 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-xs-10">
-                                    <a href="#">Script Testing App</a>
+                                    <a href="../page/page-list.html">Blogging App</a>
                                 </div>
                                 <div class="col-xs-2">
-                                    <a href="#"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+                                    <a href="website-edit.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <a href="../page/page-list.html">Script Testing App</a>
+                                </div>
+                                <div class="col-xs-2">
+                                    <a href="website-edit.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
                                 </div>
                             </div>
                         </li>
@@ -95,18 +98,18 @@
                 <div class="extra-top-padding">
                     <form>
                         <div class="form-group">
-                            <label for="webName">Name</label>
-                            <input type="text" value="Wordpress" class="form-control" id="webName" placeholder="Name">
+                            <label for="webName">Website Name</label>
+                            <input type="text" value="Wordpress" class="form-control" id="webName" placeholder="Website Name">
                         </div>
 
                         <div class="form-group">
-                            <label for="webDesc">Description</label>
-                            <textarea class="form-control" rows="7" id="webDesc" placeholder="Description">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
+                            <label for="webDesc">Website Description</label>
+                            <textarea class="form-control hide-overflow" rows="7" id="webDesc" placeholder="Website Description">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
                             </textarea>
                         </div>
                     </form>
                     <a class="btn btn-danger  btn-block"
-                       href="#">Delete</a>
+                       href="website-list.html">Delete</a>
 
 
                 </div>
@@ -118,7 +121,9 @@
     <nav class="navbar navbar-fixed-bottom bg-primary">
         <div class="container-fluid">
             <div class="navbar-text pull-right">
-                <span class="glyphicon glyphicon-user"></span>
+                <a href="../user/profile.html">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
             </div>
         </div>
     </nav>

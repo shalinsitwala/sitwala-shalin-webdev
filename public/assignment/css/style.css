@@ -117,3 +117,7 @@ a:hover{
  .remove-bottom-margin{
      margin-bottom:0px;
  }
+
+ .hide-overflow{
+     overflow:hidden;
+ }
