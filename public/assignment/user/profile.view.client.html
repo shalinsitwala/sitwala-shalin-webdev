@@ -1,0 +1,76 @@
+<nav class="navbar navbar-fixed-top bg-primary">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+                <span ng-click="model.updateUser(model.user)"
+                      class="glyphicon glyphicon-ok">
+                </span>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                Profile
+            </a>
+        </div>
+    </div>
+</nav>
+
+
+    <div class="container-fluid extra-top-padding">
+
+        <div class="alert alert-danger"
+             ng-show="model.error">
+            {{model.error}}
+        </div>
+
+        <div class="alert alert-success"
+             ng-show="model.message">
+            {{model.message}}
+        </div>
+
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" ng-model="model.user.username"
+                       class="form-control" id="username" placeholder="Username">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email"
+                       class="form-control"
+                       id="email"
+                       placeholder="alice@wonderland.com">
+            </div>
+
+            <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input ng-model="model.user.firstName"
+                       type="text"
+                       class="form-control"
+                       id="first-name"
+                       placeholder="Alice">
+            </div>
+
+            <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text"
+                       ng-model="model.user.lastName"
+                       class="form-control"
+                       id="last-name"
+                       placeholder="Wonderland">
+            </div>
+
+        </form>
+
+        <a class="btn btn-primary btn-block"
+           href="#/websites">Websites</a>
+        <a class="btn btn-danger  btn-block"
+           href="#/login">Logout</a>
+    </div>
+
+<nav class="navbar navbar-fixed-bottom bg-primary">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <span class="glyphicon glyphicon-user"></span>
+        </div>
+    </div>
+</nav>
