@@ -1,25 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="WebAppMaker">
 <head>
     <meta charset="UTF-8">
     <title>Assignment Home Page</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="../css/bootstrap.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
+    <script src="../js/angular.js"></script>
+    <script src="../js/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=no">
-
 </head>
+
 <body>
-
-    <div class="container-fluid">
-        <h1>Assignment Home Page</h1>
-
-
-
-        <div class="alert alert-info" role="alert">
-            <p><b><a href="user/login.html">Click here</a> </b>to go to the Login Page</p>
-        </div>
-    </div>
-
+    <div ng-view></div>
 </body>
 </html>
