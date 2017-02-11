@@ -15,6 +15,9 @@
             "findUserByCredentials": findUserByCredentials,
             "findUserById": findUserById,
             "updateUser": updateUser
+            //TODO: complete the CRUD functions
+            // "createUser": createUser,
+            // "deleteUser": deleteUser
         };
         return api;
 
