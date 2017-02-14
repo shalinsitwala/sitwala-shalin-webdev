@@ -14,6 +14,38 @@
         ];
         this.findAllWebSites = findAllWebSites;
         this.findWebSiteById = findWebSiteById;
+        this.createWebsite = createWebsite;
+        
+        function createWebsite(userId, website) {
+            var newSite = {
+                _id: getWebSiteId(),
+                name: website.name,
+                developerId: userId,
+                description: website.description
+            };
+
+            websites.push(newSite);
+            return newSite;
+            
+        }
+
+        function getWebSiteId() {
+            var date = new Date();
+
+            var components = [
+                date.getYear(),
+                date.getMonth(),
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes(),
+                date.getSeconds(),
+                date.getMilliseconds()
+            ];
+
+            var id = components.join("");
+
+            return id;
+        }
         
         function findWebSiteById(webSiteId) {
             for(var w in websites){

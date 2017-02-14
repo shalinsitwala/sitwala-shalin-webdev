@@ -20,15 +20,16 @@
                 controller:"ProfileController",
                 controllerAs: "model"
             })
+            // list all websites for any user
             .when("/user/:uid/website",{
                 templateUrl:"views/website/templates/website-list.view.client.html",
                 controller:"WebSiteListController",
                 controllerAs: "model"
             })
             .when("/user/:uid/website/new",{
-                templateUrl:"views/website/templates/website-new.view.client.html"
-                // controller:"WebSiteListController",
-                // controllerAs: "model"
+                templateUrl:"views/website/templates/website-new.view.client.html",
+                controller:"WebSiteNewController",
+                controllerAs: "model"
             })
             .when("/user/:uid/website/:wid",{
                 templateUrl:"views/website/templates/website-edit.view.client.html",

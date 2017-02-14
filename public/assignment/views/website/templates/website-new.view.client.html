@@ -20,7 +20,7 @@
             </div>
             <div class="col-sm-8">
                 <div class="navbar-text pull-right">
-                    <a href="website-list.view.client.html">
+                    <a ng-click="model.newSite(website)">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </div>
@@ -86,15 +86,25 @@
             <div class="col-sm-8">
                 <div class="extra-top-padding">
                     <form>
+
                         <div class="form-group">
-                            <label for="webName">Name</label>
-                            <input type="text" class="form-control" id="webName" placeholder="Name">
+                            <label for="name">Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="name"
+                                   ng-model="website.name"
+                                   placeholder="Name">
                         </div>
 
                         <div class="form-group">
-                            <label for="webDesc">Description</label>
-                            <textarea class="form-control" rows="7" id="webDesc" placeholder="Description"></textarea>
+                            <label for="description">Description</label>
+                            <textarea class="form-control"
+                                      rows="7"
+                                      id="description"
+                                      ng-model="website.description"
+                                      placeholder="Description"></textarea>
                         </div>
+
                     </form>
                 </div>
             </div>
