@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="navbar-text pull-left">
-                    <a href="website-list.view.client.html">
+                    <a ng-click="model.goBack()">
                         <span class="glyphicon glyphicon-chevron-left"></span>
                     </a>
 
@@ -20,7 +20,7 @@
             </div>
             <div class="col-sm-8">
                 <div class="navbar-text pull-right">
-                    <a href="website-list.view.client.html">
+                    <a ng-click="model.updateSite(model.website)">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </div>
@@ -33,6 +33,9 @@
     </div>
 </nav>
 <div class="container-fluid">
+
+
+
     <div class="row">
         <div>
             <div class="col-sm-4 hidden-xs hidden-sm side-border">
@@ -55,23 +58,31 @@
             </div>
             <div class="col-sm-8">
                 <div class="extra-top-padding">
+                    <div class="alert alert-danger"
+                         ng-show="model.error">
+                        {{model.error}}
+                    </div>
+                    <div class="alert alert-success"
+                         ng-show="model.message">
+                        {{model.message}}
+                    </div>
                     <form>
                         <div class="form-group">
-                            <label for="webName">Website Name</label>
+                            <label for="name">Website Name</label>
                             <input type="text"
                                    ng-model="model.website.name"
                                    class="form-control"
-                                   id="webName"
+                                   id="name"
                                    placeholder="Website Name">
                         </div>
 
                         <div class="form-group">
-                            <label for="webDesc">Website Description</label>
+                            <label for="description">Website Description</label>
                             <textarea
                                     ng-model="model.website.description"
                                     class="form-control hide-overflow"
                                     rows="7"
-                                    id="webDesc"
+                                    id="description"
                                     placeholder="Website Description">
                             </textarea>
                         </div>

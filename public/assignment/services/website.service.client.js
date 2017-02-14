@@ -12,9 +12,34 @@
             { "_id": "678", "name": "Checkers",    "developerId": "123", "description": "Lorem" },
             { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" }
         ];
-        this.findAllWebSites = findAllWebSites;
+        this.findWebsitesByUser = findWebsitesByUser;
         this.findWebSiteById = findWebSiteById;
         this.createWebsite = createWebsite;
+        this.updateWebsite = updateWebsite;
+        this.deleteWebsite = deleteWebsite;
+        
+        function deleteWebsite(websiteId) {
+            for(var w in websites){
+                if(websites[w]._id === websiteId){
+                    websites.splice(w,1);
+                    break;
+                }
+            }
+            return websites;
+            
+        }
+
+
+        function updateWebsite(websiteId, website) {
+            for(var w in websites){
+                if(websites[w]._id === websiteId){
+                    websites[w].name = website.name;
+                    websites[w].description = website.description;
+                    return websites[w];
+                }
+            }
+            return null;
+        }
         
         function createWebsite(userId, website) {
             var newSite = {
@@ -57,7 +82,7 @@
             
         }
         
-        function findAllWebSites(userId) {
+        function findWebsitesByUser(userId) {
             var sites = [];
             for(var w in websites){
                 if(userId == websites[w].developerId){
