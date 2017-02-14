@@ -21,11 +21,22 @@
             "createWidget" : createWidget,
             "findWidgetsByPageId": findWidgetsByPageId,
             "updateWidget": updateWidget,
-            "deleteWidget": deleteWidget
+            "deleteWidget": deleteWidget,
+            //for new widgets added
+            "getWidgetId": getWidgetId,
+            "getWidgetType": getWidgetType
         };
         return api;
         
-        
+        function getWidgetType(widgetId) {
+            for(var w in widgets){
+                if(widgets[w].id === widgetId){
+                    return widgets[w].widgetType;
+                }
+            }
+            return null;
+            
+        }
         function deleteWidget(widgetId) {
             for(var w in widgets){
                 if(widgets[w]._id === widgetId){
@@ -39,9 +50,22 @@
         function updateWidget(widgetId, widget) {
             for(var w in widgets){
                 if(widgets[w]._id === widgetId){
-                    // TODO
+                    if(widget.widgetType === "HEADER"){
+                        widgets[w].size = widget.size;
+                        widgets[w].text = widget.text;
+                    }
+                    else if(widget.widgetType === "HTML"){
+                        widgets[w].text = widget.text;
+                    }
+                    else if(widget.widgetType === "IMAGE"
+                                || widget.widgetType === "YOUTUBE"){
+                        widgets[w].width = widget.width;
+                        widgets[w].url = widget.url;
+                    }
+                    return widgets[w];
                 }
             }
+            return null;
             
         }
 

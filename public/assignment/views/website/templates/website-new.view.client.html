@@ -3,14 +3,16 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="navbar-text pull-left">
-                    <a href="website-list.view.client.html">
+                    <a ng-click="model.goBack()">
                         <span class="glyphicon glyphicon-chevron-left"></span>
                     </a>
 
                 </div>
                 <div class="hidden-sm hidden-xs">
                     <div class="navbar-text pull-right">
-                        <span class="glyphicon glyphicon-plus"></span>
+                        <a href="#/user/{{model.userId}}/website/new">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
                     </div>
                     <a class="navbar-brand">
                         Websites
@@ -32,51 +34,23 @@
         </div>
     </div>
 </nav>
+
+
 <div class="container-fluid">
     <div class="row">
         <div>
             <div class="col-sm-4 hidden-xs hidden-sm side-border">
                 <div class="extra-top-padding">
                     <ul class="list-group">
-                        <li class="list-group-item">
+                        <li ng-repeat="website in model.websites" class="list-group-item">
                             <div class="row">
                                 <div class="col-xs-10">
-                                    <a href="../../page/page-list.view.client.html">Address Book App</a>
+                                    <a href="../../page/templates/page-list.view.client.html">
+                                        {{website.name}}
+                                    </a>
                                 </div>
                                 <div class="col-xs-2">
-                                    <a href="website-edit.view.client.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xs-10">
-                                    <a href="../../page/page-list.view.client.html">Blogger</a>
-                                </div>
-                                <div class="col-xs-2">
-                                    <a href="website-edit.view.client.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xs-10">
-                                    <a href="../../page/page-list.view.client.html">Blogging App</a>
-                                </div>
-                                <div class="col-xs-2">
-                                    <a href="website-edit.view.client.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xs-10">
-                                    <a href="../../page/page-list.view.client.html">Script Testing App</a>
-                                </div>
-                                <div class="col-xs-2">
-                                    <a href="website-edit.view.client.html"><span class="glyphicon glyphicon-cog pull-right"></span></a>
+                                    <a href="#/user/{{website.developerId}}/website/{{website._id}}"><span class="glyphicon glyphicon-cog pull-right"></span></a>
                                 </div>
                             </div>
                         </li>
@@ -85,6 +59,12 @@
             </div>
             <div class="col-sm-8">
                 <div class="extra-top-padding">
+
+                    <div class="alert alert-danger"
+                         ng-show="model.error">
+                        {{model.error}}
+                    </div>
+
                     <form>
 
                         <div class="form-group">
@@ -115,7 +95,7 @@
     <nav class="navbar navbar-fixed-bottom bg-primary">
         <div class="container-fluid">
             <div class="navbar-text pull-right">
-                <a href="../../user/templates/profile.view.client.html">
+                <a ng-click="model.goToProfile()">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>

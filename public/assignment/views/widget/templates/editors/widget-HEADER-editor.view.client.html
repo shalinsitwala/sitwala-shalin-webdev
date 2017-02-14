@@ -1,18 +1,29 @@
 <form>
+
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" value="" class="form-control" id="name" placeholder="Name">
+        <input type="text"
+               class="form-control"
+               id="name"
+               ng-model="model.widget.name"
+               placeholder="Name">
     </div>
 
     <div class="form-group">
         <label for="text">Text</label>
-        <input type="text" class="form-control" id="text" value="Wikipedia is a free online encyclopedia that aims to allow anyone to edit articles "placeholder="Text">
+        <input type="text"
+               class="form-control"
+               id="text"
+               ng-model="model.widget.text"
+               placeholder="Text">
     </div>
 
     <div class="form-group">
         <label for="size">Size</label>
         <!--<input type="text" value="3" class="form-control" id="size" placeholder="Size">-->
-        <select class="form-control" id="size">
+        <select class="form-control"
+                id="size"
+                ng-model="model.widget.size">
             <option>1</option>
             <option>2</option>
             <option>3</option>

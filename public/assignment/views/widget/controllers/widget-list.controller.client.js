@@ -10,7 +10,7 @@
         vm.getWidgetTemplateUrl = getWidgetTemplateUrl;
 
         vm.userId = $routeParams.uid;
-        vm.webSiteId = $routeParams.wid;
+        vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
 
         vm.widgets = WidgetService.findAllWidgets(vm.pageId);

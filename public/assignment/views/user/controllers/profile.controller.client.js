@@ -11,6 +11,7 @@
 
 
         var userId = $routeParams['uid'];
+        vm.userId = userId;
 
         function init() {
             var user = UserService.findUserById(userId);
@@ -20,6 +21,7 @@
 
         
         function updateUser(newUser) {
+
            var user = UserService.updateUser(userId, newUser);
            if(user != null){
                vm.message = "User Successfully Updated";
