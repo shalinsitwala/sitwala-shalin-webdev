@@ -14,18 +14,46 @@
         var api = {
             "findUserByCredentials": findUserByCredentials,
             "findUserById": findUserById,
-            "updateUser": updateUser
-            //TODO: complete the CRUD functions
-            // "createUser": createUser,
-            // "deleteUser": deleteUser
+            "findUserByUsername": findUserByUsername,
+            "updateUser": updateUser,
+            "createUser": createUser,
+            "deleteUser": deleteUser
+
         };
         return api;
 
-        function updateUser(userId, newUser) {
+
+        function getNewUserId() {
+            var date = new Date();
+
+            var components = [
+                date.getYear(),
+                date.getMonth(),
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes(),
+                date.getSeconds(),
+                date.getMilliseconds()
+            ];
+
+            var id = components.join("");
+
+            return id;
+        }
+
+        function deleteUser(userId) {
             for(var u in users){
-                if(users[u]._id == userId){
-                    users[u].firstName = newUser.firstName;
-                    users[u].lastName = newUser.lastName;
+                if(users[u]._id === userId){
+                    users.splice(u,1);
+                    break;
+                }
+            }
+            return users;
+        }
+
+        function findUserByUsername(username) {
+            for(var u in users){
+                if(users[u].username === username){
                     return users[u];
                 }
             }
@@ -40,6 +68,41 @@
             }
             return null;
         }
+
+
+        function createUser(user) {
+
+            if(!findUserByUsername(user.username)){
+                var newUser = {
+                    _id: getNewUserId(),
+                    username: user.username,
+                    password: user.password,
+                    firstName: "",
+                    lastName: ""
+
+                };
+                users.push(newUser);
+
+                return newUser;
+            }
+            // if username already exists
+            return null;
+
+        }
+        
+        
+        function updateUser(userId, newUser) {
+            for(var u in users){
+                if(users[u]._id == userId){
+                    users[u].firstName = newUser.firstName;
+                    users[u].lastName = newUser.lastName;
+                    return users[u];
+                }
+            }
+            return null;
+        }
+
+
         
         function findUserByCredentials(username, password) {
             for(var u in users){

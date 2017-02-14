@@ -7,11 +7,18 @@
         var vm = this;
         vm.doYouTrustUrl = doYouTrustUrl;
         vm.getTrustedHtml = getTrustedHtml;
+        vm.getWidgetTemplateUrl = getWidgetTemplateUrl;
+
         vm.userId = $routeParams.uid;
         vm.webSiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
 
         vm.widgets = WidgetService.findAllWidgets(vm.pageId);
+        
+        function getWidgetTemplateUrl(widgetType) {
+            var url = 'views/widget/templates/widget-'+widgetType+'.view.client.html';
+            return url;
+        }
         
         function getTrustedHtml(html) {
             return $sce.trustAsHtml(html);

@@ -16,10 +16,19 @@
             { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
         ];
         var api = {
-            "findAllWidgets": findAllWidgets
+            "findAllWidgets": findAllWidgets,
+            "findWidgetById": findWidgetById
         };
         return api;
 
+        function findWidgetById(widgetId) {
+            for(var w in widgets){
+                if(widgets[w]._id === widgetId){
+                    return angular.copy(widgets[w]);
+                }
+            }
+            return null;
+        }
         function findAllWidgets(pageId) {
             return widgets;
         }
