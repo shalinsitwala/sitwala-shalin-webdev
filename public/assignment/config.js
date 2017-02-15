@@ -10,6 +10,16 @@
                 controller:"LoginController",
                 controllerAs: "model"
             })
+            .when("/",{
+                templateUrl:"views/user/templates/login.view.client.html",
+                controller:"LoginController",
+                controllerAs: "model"
+            })
+            .when("default",{
+                templateUrl:"views/user/templates/login.view.client.html",
+                controller:"LoginController",
+                controllerAs: "model"
+            })
             .when("/register",{
                 templateUrl:"views/user/templates/register.view.client.html",
                 controller: "RegisterController",

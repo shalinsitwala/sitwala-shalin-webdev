@@ -31,7 +31,7 @@
                 <!--Toolbar-->
                 <div class="extra-right-padding-setting pull-right widget-size">
                     <div class=" extra-right-padding-setting absolute widget-style">
-                        <a href="#/user/{{model.userId}}/website/{{model.webSiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                             <span class="glyphicon glyphicon-cog"></span>
                         </a>
                         <span class="glyphicon glyphicon-align-justify"></span>
@@ -40,7 +40,7 @@
 
                 <!--Content-->
                 <div class="container-fluid" ng-include  src="model.getWidgetTemplateUrl(widget.widgetType)">
-
+                    <div class="alert alert-info" role="alert" ng-show="model.message">{{model.message}}</div>
                 </div>
 
                 <!--Commented. Implemented by Above div and ng-include-->
@@ -68,7 +68,7 @@
     <div class="container-fluid">
 
         <div class="navbar-text pull-right">
-            <a href="">
+            <a href="#/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>

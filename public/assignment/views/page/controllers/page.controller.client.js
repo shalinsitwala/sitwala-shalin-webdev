@@ -85,6 +85,7 @@
             var updatedPage =  PageService.updatePage(pageId,page);
             if(updatedPage != null){
                 vm.message = "Page updated successfully."
+                $location.url('/user/'+userId+'/website/'+websiteId+'/page');
             }
             else{
                 vm.error = "Page update error."

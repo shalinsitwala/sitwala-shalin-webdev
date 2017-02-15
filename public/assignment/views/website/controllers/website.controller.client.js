@@ -45,6 +45,7 @@
             else{
                 vm.error = "Website update error."
             }
+            $location.url('user/' + userId + '/website');
         }
 
 

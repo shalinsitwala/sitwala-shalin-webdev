@@ -15,6 +15,8 @@
                 "url": "https://youtu.be/AM2Ivdi9c4E" },
             { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
         ];
+
+        var headerSize = [1,2,3,4,5,6];
         var api = {
             "findAllWidgets": findAllWidgets,
             "findWidgetById": findWidgetById,
@@ -24,7 +26,8 @@
             "deleteWidget": deleteWidget,
             //for new widgets added
             "getWidgetId": getWidgetId,
-            "getWidgetType": getWidgetType
+            "getWidgetType": getWidgetType,
+            "headerSize": headerSize
         };
         return api;
         
@@ -37,16 +40,17 @@
             return null;
             
         }
+
         function deleteWidget(widgetId) {
             for(var w in widgets){
                 if(widgets[w]._id === widgetId){
-                    widgets[w].splice(w,1);
+                    widgets.splice(w,1);
                     break;
                 }
             }
             return widgets;
-            
         }
+
         function updateWidget(widgetId, widget) {
             for(var w in widgets){
                 if(widgets[w]._id === widgetId){
@@ -140,6 +144,8 @@
             }
             return null;
         }
+
+
         function findAllWidgets(pageId) {
             return widgets;
         }

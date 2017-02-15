@@ -18,6 +18,10 @@
         var widgetId =$routeParams.wgid;
         vm.widgetId = widgetId;
 
+
+        var headerSize = WidgetService.headerSize;
+        vm.headerSize = headerSize;
+
         vm.getEditorTemplateUrl = getEditorTemplateUrl;
 
 
@@ -27,6 +31,14 @@
 
         //event handlers
         vm.updateWidget = updateWidget;
+        vm.deleteWidget = deleteWidget;
+        
+        function deleteWidget() {
+            WidgetService.deleteWidget(widgetId);
+            // go back to widgetlist
+            $location.url('/user/'+userId+'/website/'+webSiteId+'/page/'+pageId+'/widget');
+            
+        }
         
         function updateWidget(newWidget) {
             var updatedWidget = WidgetService.updateWidget(widgetId, newWidget);
