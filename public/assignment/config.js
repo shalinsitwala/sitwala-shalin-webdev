@@ -30,7 +30,7 @@
                 controller:"ProfileController",
                 controllerAs: "model"
             })
-            // list all websites for any user
+            // website
             .when("/user/:uid/website",{
                 templateUrl:"views/website/templates/website-list.view.client.html",
                 controller:"WebSiteListController",

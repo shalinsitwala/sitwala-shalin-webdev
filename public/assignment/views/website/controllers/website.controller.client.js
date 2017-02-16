@@ -7,21 +7,29 @@
 
 
     function webSiteEditController($routeParams, WebSiteService, $location) {
-        var userId = $routeParams.uid;
-        var webSiteId = $routeParams.wid;
-        var websites = WebSiteService.findWebsitesByUser(userId);
 
         var vm = this;
-        vm.websites = websites;
-        vm.userId = userId;
-        vm.website = WebSiteService.findWebSiteById(webSiteId);
-
 
         // event handlers
         vm.updateSite = updateSite;
         vm.goBack = goBack;
         vm.goToProfile = goToProfile;
         vm.deleteSite = deleteSite;
+
+        // variables
+        var userId = $routeParams.uid;
+        var webSiteId = $routeParams.wid;
+        var websites;
+        vm.userId = userId;
+
+        
+        function init() {
+            websites = WebSiteService.findWebsitesByUser(userId);
+            vm.websites = websites;
+            vm.website = WebSiteService.findWebSiteById(webSiteId);
+        }
+        init();
+
 
         function deleteSite() {
             WebSiteService.deleteWebsite(webSiteId);
@@ -52,17 +60,21 @@
     }
 
     function webSiteListController($routeParams, WebSiteService, $location) {
-        var userId = $routeParams.uid;
-        var websites = WebSiteService.findWebsitesByUser(userId);
-
-
         var vm = this;
-        vm.websites = websites;
-        vm.userId = userId;
 
         // event handlers
         vm.goBack = goBack;
         vm.goToProfile = goToProfile;
+
+        var userId = $routeParams.uid;
+        var websites;
+        vm.userId = userId;
+
+        function init() {
+            websites = WebSiteService.findWebsitesByUser(userId);
+            vm.websites = websites;
+        }
+        init();
 
         if(websites.length===0){
             vm.message = "No websites found. Try creating a new website.";
@@ -80,22 +92,23 @@
 
     function webSiteNewController(WebSiteService, $routeParams, $location) {
         var vm = this;
-        var userId;
-        userId = $routeParams.uid;
-        var websites = WebSiteService.findWebsitesByUser(userId);
 
-        vm.websites = websites;
-        vm.userId = userId;
-
-        function init() {
-
-        }
-        init();
-
-        // event handler
+        // event handlers
         vm.newSite = newSite;
         vm.goBack = goBack;
         vm.goToProfile = goToProfile;
+
+
+        var userId;
+        userId = $routeParams.uid;
+        var websites;
+        vm.userId = userId;
+
+        function init() {
+            websites = WebSiteService.findWebsitesByUser(userId);
+            vm.websites = websites;
+        }
+        init();
 
         function goToProfile() {
             $location.url('user/' + userId);
@@ -113,7 +126,6 @@
             else if (angular.isUndefined(website.name)){
                 vm.error = "Please enter name";
             }
-
             else{
                 // some value is filled.
                 var newWebSite = WebSiteService.createWebsite(userId, website);

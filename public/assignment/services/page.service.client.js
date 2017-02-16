@@ -62,7 +62,7 @@
         
         function createPage(websiteId, page) {
             var newPage = {
-                _id: getPageId,
+                _id: getPageId(),
                 name: page.name,
                 websiteId: websiteId,
                 description: page.description

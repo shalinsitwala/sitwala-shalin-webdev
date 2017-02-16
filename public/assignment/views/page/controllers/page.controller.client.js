@@ -6,40 +6,50 @@
         .controller("EditPageController", EditPageController)
     
     function PageListController($routeParams, $location, PageService) {
-
         var vm = this;
+
+        // event handlers
+
+        //variables
         var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
-
         vm.userId = userId;
         vm.websiteId = websiteId;
+        var pages;
+        function init() {
+            pages = PageService.findPageByWebsiteId(websiteId);
+            vm.pages = pages;
+        }
+        init();
 
-        var pages = PageService.findPageByWebsiteId(websiteId);
-        vm.pages = pages;
         if(pages.length===0){
             vm.message = "No pages found. Try creating a new page.";
         }
 
-        // event handlers
 
-        
     }
     
     
     function NewPageController($routeParams, PageService, $location) {
+
         var vm = this;
+
+        // event handlers
+        vm.newPage = newPage;
+
+        //variables
         var userId =$routeParams.uid;
         var websiteId = $routeParams.wid;
         vm.userId = userId;
         vm.websiteId = websiteId;
-        var pages = PageService.findPageByWebsiteId(websiteId);
-        vm.pages = pages;
+        var pages;
 
+        function init() {
+            pages = PageService.findPageByWebsiteId(websiteId);
+            vm.pages = pages;
+        }
+        init();
 
-        // event handlers
-        vm.newPage = newPage;
-        
-        
         function newPage(page) {
             if(angular.isUndefined(page)){
                 vm.error = "Please fill the details."
@@ -47,34 +57,36 @@
             else if (angular.isUndefined(page.name)){
                 vm.error = "Please enter name";
             }
-
             else{
                 // some value is filled.
                 var newPage = PageService.createPage(websiteId,page);
                 $location.url("/user/"+userId+"/website/"+websiteId+"/page");
-
             }
         }
-
-        
     }
     
     function EditPageController($routeParams, PageService, $location) {
         var vm = this;
+
+        // event handlers
+        vm.updatePage = updatePage;
+        vm.deletePage = deletePage;
+
+        // variables
         var userId =$routeParams.uid;
         var websiteId = $routeParams.wid;
         var pageId = $routeParams.pid;
         vm.userId = userId;
         vm.websiteId = websiteId;
         vm.pageId = pageId;
-        var pages = PageService.findPageByWebsiteId(websiteId);
-        vm.pages = pages;
+        var pages;
 
-        vm.page = PageService.findPageById(pageId);
-        
-        // event handlers
-        vm.updatePage = updatePage;
-        vm.deletePage = deletePage;
+        function init() {
+            pages = PageService.findPageByWebsiteId(websiteId);
+            vm.pages = pages;
+            vm.page = PageService.findPageById(pageId);
+        }
+        init();
 
         function deletePage() {
             PageService.deletePage(pageId);
@@ -91,7 +103,5 @@
                 vm.error = "Page update error."
             }
         }
-
-        
     }
 })();

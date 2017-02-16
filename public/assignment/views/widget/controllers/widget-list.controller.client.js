@@ -5,6 +5,8 @@
     
     function widgetListController($sce, $routeParams, WidgetService) {
         var vm = this;
+
+        // Event Handlers
         vm.doYouTrustUrl = doYouTrustUrl;
         vm.getTrustedHtml = getTrustedHtml;
         vm.getWidgetTemplateUrl = getWidgetTemplateUrl;
@@ -15,9 +17,14 @@
         var websiteId = $routeParams.wid;
         vm.websiteId = websiteId;
         vm.pageId = $routeParams.pid;
+        var widgets;
 
-        var widgets = WidgetService.findAllWidgets(vm.pageId);
-        vm.widgets = widgets;
+        function init() {
+            widgets = WidgetService.findWidgetsByPageId(vm.pageId);
+            vm.widgets = widgets;
+        }
+        init();
+
         if(widgets.length===0){
             vm.message = "No widgets found. Try creating a new widget.";
         }

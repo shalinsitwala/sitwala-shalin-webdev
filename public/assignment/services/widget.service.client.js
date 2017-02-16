@@ -146,7 +146,7 @@
         }
 
 
-        function findAllWidgets(pageId) {
+        function findAllWidgets() {
             return widgets;
         }
     }

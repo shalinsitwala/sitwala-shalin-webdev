@@ -24,7 +24,6 @@
                         // user not created from the service funcion
                         // bcoz username is taken already
                         vm.error = "Username already taken. Try a new one."
-
                     }
                 }
                 else
@@ -42,8 +41,6 @@
                 // fields empty
                 vm.error = "Please enter values";
             }
-
         }
-
     }
 })();
