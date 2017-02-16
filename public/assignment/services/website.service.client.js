@@ -1,7 +1,7 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .service("WebSiteService",WebSiteService)
+        .factory("WebSiteService",WebSiteService);
     
     function WebSiteService() {
         var websites = [
@@ -12,11 +12,16 @@
             { "_id": "678", "name": "Checkers",    "developerId": "123", "description": "Lorem" },
             { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" }
         ];
-        this.findWebsitesByUser = findWebsitesByUser;
-        this.findWebSiteById = findWebSiteById;
-        this.createWebsite = createWebsite;
-        this.updateWebsite = updateWebsite;
-        this.deleteWebsite = deleteWebsite;
+
+
+        var api = {
+            "findWebsitesByUser": findWebsitesByUser,
+            "findWebSiteById": findWebSiteById,
+            "createWebsite": createWebsite,
+            "updateWebsite": updateWebsite,
+            "deleteWebsite": deleteWebsite
+        };
+        return api;
         
         function deleteWebsite(websiteId) {
             for(var w in websites){

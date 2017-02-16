@@ -22,12 +22,14 @@
         function init() {
             widgets = WidgetService.findWidgetsByPageId(vm.pageId);
             vm.widgets = widgets;
+
+            if(widgets.length===0){
+                vm.message = "No widgets found. Try creating a new widget.";
+            }
         }
         init();
 
-        if(widgets.length===0){
-            vm.message = "No widgets found. Try creating a new widget.";
-        }
+
         
         function getWidgetTemplateUrl(widgetType) {
             var url = 'views/widget/templates/widget-'+widgetType+'.view.client.html';

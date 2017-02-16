@@ -1,7 +1,7 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .service("PageService", PageService)
+        .factory("PageService", PageService);
     
     function PageService() {
         var pages = [
@@ -10,13 +10,16 @@
             { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" }
         ];
 
-        this.createPage = createPage;
-        this.findPageByWebsiteId = findPageByWebsiteId;
-        this.findPageById = findPageById;
-        this.updatePage = updatePage;
-        this.deletePage = deletePage;
-        
-        
+
+        var api = {
+            "createPage": createPage,
+            "findPageByWebsiteId": findPageByWebsiteId,
+            "findPageById": findPageById,
+            "updatePage": updatePage,
+            "deletePage": deletePage
+        };
+        return api;
+
         function deletePage(pageId) {
             for(var p in pages){
                 if(pages[p]._id === pageId){

@@ -36,6 +36,7 @@
         }
         init();
 
+        
         function deleteWidget() {
             WidgetService.deleteWidget(widgetId);
             // go back to widgetlist
