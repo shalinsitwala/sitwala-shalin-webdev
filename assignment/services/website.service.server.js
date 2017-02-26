@@ -53,12 +53,10 @@ module.exports = function (app) {
     function createWebsite(req, res) {
 
         var userId = req.params.userId;
-        console.log("userid is " + userId);
         var newSite = req.body;
         newSite._id = (new Date()).getTime() + "";
         newSite.developerId = userId;
         websites.push(newSite);
-        console.log(newSite);
         res.json(newSite);
     }
 
@@ -71,7 +69,5 @@ module.exports = function (app) {
             }
         }
         res.json(sites);
-
-
     }
 }

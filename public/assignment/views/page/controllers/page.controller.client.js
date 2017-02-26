@@ -4,7 +4,7 @@
         .controller("PageListController", PageListController)
         .controller("NewPageController", NewPageController)
         .controller("EditPageController", EditPageController)
-    
+
     function PageListController($routeParams, $location, PageService) {
         var vm = this;
 
@@ -16,20 +16,24 @@
         vm.userId = userId;
         vm.websiteId = websiteId;
         var pages;
-        function init() {
-            pages = PageService.findPageByWebsiteId(websiteId);
-            vm.pages = pages;
-        }
-        init();
 
-        if(pages.length===0){
-            vm.message = "No pages found. Try creating a new page.";
+        function init() {
+            PageService
+                .findPageByWebsiteId(websiteId)
+                .success(function (pages) {
+                    vm.pages = pages;
+                    if (vm.pages.length == 0) {
+                        vm.message = "No pages found. Try creating a new page.";
+                    }
+                });
         }
+
+        init();
 
 
     }
-    
-    
+
+
     function NewPageController($routeParams, PageService, $location) {
 
         var vm = this;
@@ -38,33 +42,41 @@
         vm.newPage = newPage;
 
         //variables
-        var userId =$routeParams.uid;
+        var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
         vm.userId = userId;
         vm.websiteId = websiteId;
         var pages;
 
         function init() {
-            pages = PageService.findPageByWebsiteId(websiteId);
-            vm.pages = pages;
+            PageService
+                .findPageByWebsiteId(websiteId)
+                .success(function (pages) {
+                    vm.pages = pages;
+                });
+
         }
+
         init();
 
         function newPage(page) {
-            if(angular.isUndefined(page)){
+            if (angular.isUndefined(page)) {
                 vm.error = "Please fill the details."
             }
-            else if (angular.isUndefined(page.name)){
+            else if (angular.isUndefined(page.name)) {
                 vm.error = "Please enter name";
             }
-            else{
+            else {
                 // some value is filled.
-                var newPage = PageService.createPage(websiteId,page);
-                $location.url("/user/"+userId+"/website/"+websiteId+"/page");
+                PageService
+                    .createPage(websiteId, page)
+                    .success(function (newPage) {
+                        $location.url("/user/" + userId + "/website/" + websiteId + "/page");
+                    });
             }
         }
     }
-    
+
     function EditPageController($routeParams, PageService, $location) {
         var vm = this;
 
@@ -73,7 +85,7 @@
         vm.deletePage = deletePage;
 
         // variables
-        var userId =$routeParams.uid;
+        var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
         var pageId = $routeParams.pid;
         vm.userId = userId;
@@ -82,26 +94,43 @@
         var pages;
 
         function init() {
-            pages = PageService.findPageByWebsiteId(websiteId);
-            vm.pages = pages;
-            vm.page = PageService.findPageById(pageId);
+            PageService
+                .findPageByWebsiteId(websiteId)
+                .success(function (pages) {
+                    vm.pages = pages;
+                });
+
+            PageService
+                .findPageById(pageId)
+                .success(function (page) {
+                    vm.page = page;
+                });
         }
+
         init();
 
         function deletePage() {
-            PageService.deletePage(pageId);
-            $location.url('/user/'+userId+'/website/'+websiteId+'/page');
+            PageService
+                .deletePage(pageId)
+                .success(function () {
+                    $location.url('/user/' + userId + '/website/' + websiteId + '/page');
+                });
+
         }
 
         function updatePage(page) {
-            var updatedPage =  PageService.updatePage(pageId,page);
-            if(updatedPage != null){
-                vm.message = "Page updated successfully."
-                $location.url('/user/'+userId+'/website/'+websiteId+'/page');
-            }
-            else{
-                vm.error = "Page update error."
-            }
+            PageService
+                .updatePage(pageId, page)
+                .success(function (updatedPage) {
+                    if (updatedPage != null) {
+                        vm.message = "Page updated successfully."
+                        $location.url('/user/' + userId + '/website/' + websiteId + '/page');
+                    }
+                    else {
+                        vm.error = "Page update error."
+                    }
+                });
+
         }
     }
 })();
