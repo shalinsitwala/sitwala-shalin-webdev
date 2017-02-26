@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .factory("UserService", userService);
 
-    function userService() {
+    function userService($http) {
         var users = [
             {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
             {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
@@ -105,13 +105,7 @@
 
         
         function findUserByCredentials(username, password) {
-            for(var u in users){
-                if(users[u].username == username && users[u].password == password){
-                    return angular.copy(users[u]);
-                }
-            }
-            return null;
-            
+            return $http.get("/api/user?username="+username+"&password="+password);
         }
     }
     
