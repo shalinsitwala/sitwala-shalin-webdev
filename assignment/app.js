@@ -1,5 +1,6 @@
 module.exports =  function (app) {
     app.get("/api/user", findUserByCredentials);
+    app.get("/api/user/:userId", findUserById);
 
 
     var users = [
@@ -9,6 +10,15 @@ module.exports =  function (app) {
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
     ];
 
+    
+    function findUserById(req,res) {
+        var userId = req.params.userId;
+        var user = users.find(function (u) {
+            return u._id == userId;
+        });
+        res.json(user);
+
+    }
     function findUserByCredentials(req,res) {
         var username = req.query.username;
         var password = req.query.password;
@@ -19,8 +29,8 @@ module.exports =  function (app) {
             return user.password == password && user.username == username;
 
         });
-        console.log(user);
-        res.send(user);
+
+        res.json(user);
     }
      
 }
