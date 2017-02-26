@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .controller("WebSiteEditController", webSiteEditController)
         .controller("WebSiteListController", webSiteListController)
-        .controller("WebSiteNewController", webSiteNewController)
+        .controller("WebSiteNewController", webSiteNewController);
 
 
     function webSiteEditController($routeParams, WebSiteService, $location) {
@@ -24,18 +24,31 @@
 
 
         function init() {
-            websites = WebSiteService.findWebsitesByUser(userId);
-            vm.websites = websites;
-            vm.website = WebSiteService.findWebSiteById(webSiteId);
+            WebSiteService
+                .findWebsitesByUser(userId)
+                .success(function (websites) {
+                    vm.websites = websites;
+                });
+
+            WebSiteService
+                .findWebSiteById(webSiteId)
+                .success(function (website) {
+                    vm.website = website;
+                })
         }
 
         init();
 
 
         function deleteSite() {
-            WebSiteService.deleteWebsite(webSiteId);
-            $location.url('user/' + userId + '/website');
-
+            WebSiteService
+                .deleteWebsite(webSiteId)
+                .success(function () {
+                    $location.url('user/' + userId + '/website');
+                })
+                .error(function () {
+                    vm.error = "Could not delete. Please try again.";
+                });
         }
 
         function goToProfile() {
@@ -47,17 +60,19 @@
         }
 
         function updateSite(newSite) {
-            var updatedWebSite = WebSiteService.updateWebsite(webSiteId, newSite);
-            if (updatedWebSite != null) {
-                vm.message = "Website updated successfully."
-            }
-            else {
-                vm.error = "Website update error."
-            }
-            $location.url('user/' + userId + '/website');
+            WebSiteService
+                .updateWebsite(webSiteId, newSite)
+                .success(function (updatedWebSite) {
+                    if (updatedWebSite != null) {
+                        vm.message = "Website updated successfully."
+                    }
+                    else {
+                        vm.error = "Website update error."
+                    }
+                    $location.url('user/' + userId + '/website');
+                });
+
         }
-
-
     }
 
     function webSiteListController($routeParams, WebSiteService, $location) {
@@ -76,6 +91,9 @@
                 .findWebsitesByUser(userId)
                 .success(function (websites) {
                     vm.websites = websites;
+                    if (vm.websites.length == 0) {
+                        vm.message = "No websites found. Try creating a new website.";
+                    }
                 });
         }
 
@@ -110,8 +128,12 @@
         vm.userId = userId;
 
         function init() {
-            WebSiteService.findWebsitesByUser(userId);
-            vm.websites = websites;
+            WebSiteService
+                .findWebsitesByUser(userId)
+                .success(function (websites) {
+                    vm.websites = websites;
+                });
+
         }
 
         init();
@@ -134,8 +156,13 @@
             }
             else {
                 // some value is filled.
-                var newWebSite = WebSiteService.createWebsite(userId, website);
-                $location.url("user/" + userId + "/website");
+
+                WebSiteService
+                    .createWebsite(userId, website)
+                    .success(function (website) {
+                        $location.url("user/" + userId + "/website");
+                    })
+
 
             }
         }

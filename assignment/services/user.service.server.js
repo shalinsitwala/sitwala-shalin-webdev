@@ -1,8 +1,8 @@
 module.exports = function (app) {
-    app.get("/api/user", findUser);
+    app.post("/api/user", createUser);
+    app.get("/api/user", findUser); // by username and cred
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
-    app.post("/api/user", createUser);
     app.delete("/api/user/:userId", deleteUser);
 
 
@@ -16,7 +16,6 @@ module.exports = function (app) {
 
     function createUser(req, res) {
         var newUser = req.body;
-
         newUser._id = (new Date()).getTime() + ""; // the last quote is to convert to string
         users.push(newUser);
         res.json(newUser);

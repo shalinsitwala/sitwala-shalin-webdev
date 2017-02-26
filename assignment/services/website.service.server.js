@@ -1,6 +1,9 @@
 module.exports = function (app) {
-    console.log("inside website service");
+    app.post('/api/user/:userId/website', createWebsite);
     app.get('/api/user/:userId/website', findWebsitesByUser);
+    app.get('/api/website/:websiteId', findWebsiteById);
+    app.put('/api/website/:websiteId', updateWebsite);
+    app.delete('/api/website/:websiteId', deleteWebsite);
 
     var websites = [
         {"_id": "123", "name": "Facebook", "developerId": "456", "description": "Lorem"},
@@ -11,6 +14,54 @@ module.exports = function (app) {
         {"_id": "789", "name": "Chess", "developerId": "234", "description": "Lorem"}
     ];
 
+
+    function deleteWebsite(req, res) {
+        var websiteId = req.params.websiteId;
+        for (w in websites) {
+            if (websites[w]._id === websiteId) {
+                websites.splice(w, 1);
+                res.sendStatus(200);
+                return;
+            }
+        }
+        res.sendStatus(404);
+    }
+
+    function updateWebsite(req, res) {
+        var websiteId = req.params.websiteId;
+        var newSite = req.body;
+        for (w in websites) {
+            if (websites[w]._id == websiteId) {
+                websites[w].name = newSite.name;
+                websites[w].description = newSite.description;
+                res.json(websites[w]);
+                return;
+            }
+        }
+    }
+
+
+    function findWebsiteById(req, res) {
+        var websiteId = req.params.websiteId;
+        var website = websites.find(function (w) {
+            return w._id === websiteId;
+        });
+        res.json(website);
+    }
+
+
+    function createWebsite(req, res) {
+
+        var userId = req.params.userId;
+        console.log("userid is " + userId);
+        var newSite = req.body;
+        newSite._id = (new Date()).getTime() + "";
+        newSite.developerId = userId;
+        websites.push(newSite);
+        console.log(newSite);
+        res.json(newSite);
+    }
+
     function findWebsitesByUser(req, res) {
         var userId = req.params.userId;
         var sites = [];
@@ -19,7 +70,6 @@ module.exports = function (app) {
                 sites.push(websites[w]);
             }
         }
-        console.log(sites);
         res.json(sites);
 
 
