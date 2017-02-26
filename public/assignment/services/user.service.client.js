@@ -42,13 +42,15 @@
         }
 
         function deleteUser(userId) {
-            for (var u in users) {
-                if (users[u]._id === userId) {
-                    users.splice(u, 1);
-                    break;
-                }
-            }
-            return users;
+
+            return $http.delete('/api/user/'+ userId);
+            // for (var u in users) {
+            //     if (users[u]._id === userId) {
+            //         users.splice(u, 1);
+            //         break;
+            //     }
+            // }
+            // return users;
         }
 
         function findUserByUsername(username) {
@@ -68,21 +70,22 @@
 
         function createUser(user) {
 
-            if (!findUserByUsername(user.username)) {
-                var newUser = {
-                    _id: getNewUserId(),
-                    username: user.username,
-                    password: user.password,
-                    firstName: "",
-                    lastName: ""
-
-                };
-                users.push(newUser);
-
-                return newUser;
-            }
-            // if username already exists
-            return null;
+            return $http.post("/api/user",user);
+            // if (!findUserByUsername(user.username)) {
+            //     var newUser = {
+            //         _id: getNewUserId(),
+            //         username: user.username,
+            //         password: user.password,
+            //         firstName: "",
+            //         lastName: ""
+            //
+            //     };
+            //     users.push(newUser);
+            //
+            //     return newUser;
+            // }
+            // // if username already exists
+            // return null;
 
         }
 
