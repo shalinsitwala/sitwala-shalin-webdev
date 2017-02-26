@@ -22,18 +22,19 @@
         var websites;
         vm.userId = userId;
 
-        
+
         function init() {
             websites = WebSiteService.findWebsitesByUser(userId);
             vm.websites = websites;
             vm.website = WebSiteService.findWebSiteById(webSiteId);
         }
+
         init();
 
 
         function deleteSite() {
             WebSiteService.deleteWebsite(webSiteId);
-            $location.url('user/'+ userId+'/website');
+            $location.url('user/' + userId + '/website');
 
         }
 
@@ -42,15 +43,15 @@
         }
 
         function goBack() {
-            $location.url('user/'+ userId+ '/website');
+            $location.url('user/' + userId + '/website');
         }
 
         function updateSite(newSite) {
-            var updatedWebSite =  WebSiteService.updateWebsite(webSiteId,newSite);
-            if(updatedWebSite != null){
+            var updatedWebSite = WebSiteService.updateWebsite(webSiteId, newSite);
+            if (updatedWebSite != null) {
                 vm.message = "Website updated successfully."
             }
-            else{
+            else {
                 vm.error = "Website update error."
             }
             $location.url('user/' + userId + '/website');
@@ -71,14 +72,18 @@
         vm.userId = userId;
 
         function init() {
-            websites = WebSiteService.findWebsitesByUser(userId);
-            vm.websites = websites;
+            WebSiteService
+                .findWebsitesByUser(userId)
+                .success(function (websites) {
+                    vm.websites = websites;
+                });
         }
+
         init();
 
-        if(websites.length===0){
-            vm.message = "No websites found. Try creating a new website.";
-        }
+        // if (vm.websites.length === 0) {
+        //     vm.message = "No websites found. Try creating a new website.";
+        // }
 
 
         function goToProfile() {
@@ -105,9 +110,10 @@
         vm.userId = userId;
 
         function init() {
-            websites = WebSiteService.findWebsitesByUser(userId);
+            WebSiteService.findWebsitesByUser(userId);
             vm.websites = websites;
         }
+
         init();
 
         function goToProfile() {
@@ -115,21 +121,21 @@
         }
 
         function goBack() {
-            $location.url('user/'+ userId+ '/website');
+            $location.url('user/' + userId + '/website');
         }
 
 
         function newSite(website) {
-            if(angular.isUndefined(website)){
+            if (angular.isUndefined(website)) {
                 vm.error = "Please fill the details."
             }
-            else if (angular.isUndefined(website.name)){
+            else if (angular.isUndefined(website.name)) {
                 vm.error = "Please enter name";
             }
-            else{
+            else {
                 // some value is filled.
                 var newWebSite = WebSiteService.createWebsite(userId, website);
-                $location.url("user/"+userId+"/website");
+                $location.url("user/" + userId + "/website");
 
             }
         }

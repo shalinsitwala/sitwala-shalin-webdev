@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .factory("WebSiteService",WebSiteService);
     
-    function WebSiteService() {
+    function WebSiteService($http) {
         var websites = [
             { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
             { "_id": "234", "name": "Tweeter",     "developerId": "456", "description": "Lorem" },
@@ -88,13 +88,7 @@
         }
         
         function findWebsitesByUser(userId) {
-            var sites = [];
-            for(var w in websites){
-                if(userId == websites[w].developerId){
-                    sites.push(websites[w]);
-                }
-            }
-            return sites;
+            return $http.get("/api/user/"+userId+"/website");
         }
     }
 })();

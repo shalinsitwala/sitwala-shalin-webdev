@@ -52,12 +52,13 @@
         }
 
         function findUserByUsername(username) {
-            for (var u in users) {
-                if (users[u].username === username) {
-                    return angular.copy(users[u]);
-                }
-            }
-            return null;
+            return $http.get("/api/user?username="+username);
+            // for (var u in users) {
+            //     if (users[u].username === username) {
+            //         return angular.copy(users[u]);
+            //     }
+            // }
+            // return null;
         }
 
         function findUserById(userId) {
@@ -87,14 +88,15 @@
 
 
         function updateUser(userId, newUser) {
-            for (var u in users) {
-                if (users[u]._id == userId) {
-                    users[u].firstName = newUser.firstName;
-                    users[u].lastName = newUser.lastName;
-                    return users[u];
-                }
-            }
-            return null;
+            return $http.put("/api/user/" + userId, newUser);
+            // for (var u in users) {
+            //     if (users[u]._id == userId) {
+            //         users[u].firstName = newUser.firstName;
+            //         users[u].lastName = newUser.lastName;
+            //         return users[u];
+            //     }
+            // }
+            // return null;
         }
 
 

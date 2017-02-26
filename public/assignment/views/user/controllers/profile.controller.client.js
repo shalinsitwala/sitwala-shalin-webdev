@@ -26,14 +26,16 @@
 
         function updateUser(newUser) {
 
-            var user = UserService.updateUser(userId, newUser);
-            if (user != null) {
-                vm.message = "User Successfully Updated";
-            }
-            else {
-                vm.error = "Unable to update user";
-            }
-
+            UserService
+                .updateUser(userId, newUser)
+                .success(function (user) {
+                    if (user != null) {
+                        vm.message = "User Successfully Updated";
+                    }
+                    else {
+                        vm.error = "Unable to update user";
+                    }
+                });
         }
     }
 })();
