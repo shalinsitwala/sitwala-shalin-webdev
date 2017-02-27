@@ -3,9 +3,9 @@
     angular
         .module("WebAppMaker")
         .controller("NewWidgetController", NewWidgetController);
-    
-    
-    function NewWidgetController($location, $routeParams,WidgetService) {
+
+
+    function NewWidgetController($location, $routeParams, WidgetService) {
         var vm = this;
         var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
@@ -16,16 +16,18 @@
 
         // event handlers
         vm.newWidget = newWidget;
-        
+
         function newWidget(newWidgetType) {
 
-                var newWidget = {
-                    type: newWidgetType
-                };
+            var newWidget = {
+                type: newWidgetType
+            };
 
-            var addedWidget = WidgetService.createWidget(pageId, newWidget);
-            $location.url('/user/'+userId+'/website/'+websiteId+'/page/'+pageId+'/widget/'+addedWidget._id);
+            WidgetService
+                .createWidget(pageId, newWidget)
+                .success(function (addedWidget) {
+                    $location.url('/user/' + userId + '/website/' + websiteId + '/page/' + pageId + '/widget/' + addedWidget._id);
+                });
         }
-
     }
 })();

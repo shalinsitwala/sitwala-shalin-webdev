@@ -2,7 +2,7 @@
     angular
         .module("WebAppMaker")
         .controller("WidgetListController", widgetListController)
-    
+
     function widgetListController($sce, $routeParams, WidgetService) {
         var vm = this;
 
@@ -20,27 +20,31 @@
         var widgets;
 
         function init() {
-            widgets = WidgetService.findWidgetsByPageId(vm.pageId);
-            vm.widgets = widgets;
+            WidgetService
+                .findWidgetsByPageId(vm.pageId)
+                .success(function (widgets) {
+                    vm.widgets = widgets;
 
-            if(widgets.length===0){
-                vm.message = "No widgets found. Try creating a new widget.";
-            }
+                    if (widgets.length === 0) {
+                        vm.message = "No widgets found. Try creating a new widget.";
+                    }
+                });
+
         }
+
         init();
 
 
-        
         function getWidgetTemplateUrl(widgetType) {
-            var url = 'views/widget/templates/widget-'+widgetType+'.view.client.html';
+            var url = 'views/widget/templates/widget-' + widgetType + '.view.client.html';
             return url;
         }
-        
+
         function getTrustedHtml(html) {
             return $sce.trustAsHtml(html);
         }
-        
-        
+
+
         function doYouTrustUrl(url) {
             var baseUrl = "https://www.youtube.com/embed/";
             var urlParts = url.split('/');

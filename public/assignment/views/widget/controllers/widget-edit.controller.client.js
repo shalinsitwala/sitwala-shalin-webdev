@@ -2,7 +2,7 @@
     angular
         .module("WebAppMaker")
         .controller("WidgetEditController", WidgetEditController)
-    
+
     function WidgetEditController($routeParams, WidgetService, $location) {
         var vm = this;
 
@@ -18,39 +18,49 @@
         vm.websiteId = webSiteId;
         var pageId = $routeParams.pid;
         vm.pageId = pageId;
-        var widgetId =$routeParams.wgid;
+        var widgetId = $routeParams.wgid;
         vm.widgetId = widgetId;
         var headerSize;
 
 
-
         // for the new widget add
-        var widgetType = WidgetService.getWidgetType(widgetId);
+        // var widgetType = WidgetService.getWidgetType(widgetId);
 
 
         function init() {
             vm.getEditorTemplateUrl = getEditorTemplateUrl;
-            headerSize  = WidgetService.headerSize;
+            console.log("editortemplate url in edit controller " + vm.getEditorTemplateUrl.toString());
+            headerSize = WidgetService.headerSize;
             vm.headerSize = headerSize;
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            WidgetService
+                .findWidgetById(vm.widgetId)
+                .success(function (response) {
+                    vm.widget = response;
+                });
         }
+
         init();
 
-        
-        function deleteWidget() {
-            WidgetService.deleteWidget(widgetId);
-            // go back to widgetlist
-            $location.url('/user/'+userId+'/website/'+webSiteId+'/page/'+pageId+'/widget');
-        }
-        
-        function updateWidget(newWidget) {
-            var updatedWidget = WidgetService.updateWidget(widgetId, newWidget);
-            $location.url('/user/'+userId+'/website/'+webSiteId+'/page/'+pageId+'/widget');
 
+        function deleteWidget() {
+            WidgetService
+                .deleteWidget(widgetId)
+                .success(function () {
+                    // go back to widgetlist
+                    $location.url('/user/' + userId + '/website/' + webSiteId + '/page/' + pageId + '/widget');
+                });
+        }
+
+        function updateWidget(newWidget) {
+            WidgetService
+                .updateWidget(widgetId, newWidget)
+                .success(function (updatedWidget) {
+                    $location.url('/user/' + userId + '/website/' + webSiteId + '/page/' + pageId + '/widget');
+                });
         }
 
         function getEditorTemplateUrl(type) {
-            return 'views/widget/templates/editors/widget-'+type+'-editor.view.client.html';
+            return 'views/widget/templates/editors/widget-' + type + '-editor.view.client.html';
         }
 
     }
