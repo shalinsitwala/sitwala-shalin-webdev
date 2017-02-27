@@ -28,8 +28,13 @@
                     if (widgets.length === 0) {
                         vm.message = "No widgets found. Try creating a new widget.";
                     }
+
+
                 });
 
+            $('#widget-list').sortable({
+                axis: "y"
+            });
         }
 
         init();
