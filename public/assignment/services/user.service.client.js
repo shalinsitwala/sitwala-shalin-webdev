@@ -35,22 +35,6 @@
         function createUser(user) {
 
             return $http.post("/api/user",user);
-            // if (!findUserByUsername(user.username)) {
-            //     var newUser = {
-            //         _id: getNewUserId(),
-            //         username: user.username,
-            //         password: user.password,
-            //         firstName: "",
-            //         lastName: ""
-            //
-            //     };
-            //     users.push(newUser);
-            //
-            //     return newUser;
-            // }
-            // // if username already exists
-            // return null;
-
         }
 
 

@@ -25,6 +25,9 @@
                     if (vm.pages.length == 0) {
                         vm.message = "No pages found. Try creating a new page.";
                     }
+                })
+                .error(function () {
+                    vm.message = "Could not find page.";
                 });
         }
 
@@ -53,6 +56,9 @@
                 .findPageByWebsiteId(websiteId)
                 .success(function (pages) {
                     vm.pages = pages;
+                })
+                .error(function () {
+                    vm.message = "Could not find pages.";
                 });
 
         }
@@ -114,6 +120,9 @@
                 .deletePage(pageId)
                 .success(function () {
                     $location.url('/user/' + userId + '/website/' + websiteId + '/page');
+                })
+                .error(function () {
+                   vm.message="Could not delete the page. Please try again later.";
                 });
 
         }
