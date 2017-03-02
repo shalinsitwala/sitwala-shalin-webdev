@@ -12,6 +12,7 @@
             "findWidgetsByPageId": findWidgetsByPageId,
             "updateWidget": updateWidget,
             "deleteWidget": deleteWidget,
+            "sortWidgetList": sortWidgetList,
             //for new widgets added
             // "getWidgetId": getWidgetId,
             // "getWidgetType": getWidgetType,
@@ -45,28 +46,14 @@
             return $http.post('/api/page/' + pageId + '/widget', widget);
         }
 
-        // function getWidgetId() {
-        //     var date = new Date();
-        //
-        //     var components = [
-        //         date.getYear(),
-        //         date.getMonth(),
-        //         date.getDate(),
-        //         date.getHours(),
-        //         date.getMinutes(),
-        //         date.getSeconds(),
-        //         date.getMilliseconds()
-        //     ];
-        //
-        //     var id = components.join("");
-        //
-        //     return id;
-        // }
-
 
         function findWidgetById(widgetId) {
             return $http.get('/api/widget/' + widgetId);
         }
 
+
+        function sortWidgetList(pageId, initial, final) {
+            return $http.put("/api/page/" + pageId + "/widget?initial=" + initial + "&final=" + final);
+        }
     }
 })();

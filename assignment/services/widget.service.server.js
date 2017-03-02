@@ -4,6 +4,7 @@ module.exports = function (app) {
     app.get('/api/widget/:widgetId', findWidgetById);
     app.put('/api/widget/:widgetId', updateWidget);
     app.delete('/api/widget/:widgetId', deleteWidget);
+    app.put("/api/page/:pageId/widget?initial=initial&final=final", sortWidgets);
 
     var multer = require('multer'); // npm install multer --save
 
@@ -38,7 +39,22 @@ module.exports = function (app) {
     ];
 
 
+    function sortWidgets(req, res) {
+        var pageId = req.params.pageId;
+        var initial = req.query.initial;
+        var final = req.query.final;
 
+        var widg = [];
+        for (var w in widgets) {
+            if (pageId === widgets[w].pageId) {
+                widg.push(widgets[w]);
+            }
+        }
+        widgets.splice(final, 0, widgets[initial]);
+        widgets.splice(initial, 1);
+
+        res.json(widgets);
+    }
 
     function uploadImage(req, res) {
 
