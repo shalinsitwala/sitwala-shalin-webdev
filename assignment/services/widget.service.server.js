@@ -5,6 +5,19 @@ module.exports = function (app) {
     app.put('/api/widget/:widgetId', updateWidget);
     app.delete('/api/widget/:widgetId', deleteWidget);
 
+    var multer = require('multer'); // npm install multer --save
+
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, __dirname + "/../../public/uploads")
+        },
+        filename: function (req, file, cb) {
+            var extArray = file.mimetype.split("/");
+            var extension = extArray[extArray.length - 1];
+            cb(null, 'widget_image_' + Date.now() + '.' + extension)
+        }
+    });
+    var upload = multer({storage: storage});
 
     app.post("/api/upload", upload.single('myFile'), uploadImage);
 
@@ -24,19 +37,7 @@ module.exports = function (app) {
         {"_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
     ];
 
-    var multer = require('multer'); // npm install multer --save
 
-    var storage = multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, __dirname + "/../../public/uploads")
-        },
-        filename: function (req, file, cb) {
-            var extArray = file.mimetype.split("/");
-            var extension = extArray[extArray.length - 1];
-            cb(null, 'widget_image_' + Date.now() + '.' + extension)
-        }
-    });
-    var upload = multer({storage: storage});
 
 
     function uploadImage(req, res) {
