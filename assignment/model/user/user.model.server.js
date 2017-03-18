@@ -6,11 +6,11 @@ module.exports = function () {
 
     var api = {
         createUser: createUser,
-        deleteUser: deleteUser,
-        updateUser: updateUser,
         findUserById: findUserById,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
+        updateUser: updateUser,
+        deleteUser: deleteUser,
         setModel: setModel
     };
 

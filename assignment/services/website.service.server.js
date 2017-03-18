@@ -1,4 +1,5 @@
-module.exports = function (app) {
+module.exports = function (app, model) {
+    var websiteModel = model.websiteModel;
     app.post('/api/user/:userId/website', createWebsite);
     app.get('/api/user/:userId/website', findWebsitesByUser);
     app.get('/api/website/:websiteId', findWebsiteById);
@@ -43,31 +44,55 @@ module.exports = function (app) {
 
     function findWebsiteById(req, res) {
         var websiteId = req.params.websiteId;
-        var website = websites.find(function (w) {
-            return w._id === websiteId;
-        });
-        res.json(website);
+        websiteModel
+            .findWebsiteById(websiteId)
+            .then(function (site) {
+                res.json(site);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
+        // var website = websites.find(function (w) {
+        //     return w._id === websiteId;
+        // });
+        // res.json(website);
     }
 
 
     function createWebsite(req, res) {
-
         var userId = req.params.userId;
         var newSite = req.body;
-        newSite._id = (new Date()).getTime() + "";
-        newSite.developerId = userId;
-        websites.push(newSite);
-        res.json(newSite);
+
+        websiteModel
+            .createWebsite(userId, newSite)
+            .then(function (newSite) {
+                res.json(newSite);
+            }, function (err) {
+                res.statusCode(404).send(error);
+            });
+
+
+        // newSite._id = (new Date()).getTime() + "";
+        // newSite.developerId = userId;
+        // websites.push(newSite);
+        // res.json(newSite);
     }
 
     function findWebsitesByUser(req, res) {
         var userId = req.params.userId;
-        var sites = [];
-        for (var w in websites) {
-            if (userId == websites[w].developerId) {
-                sites.push(websites[w]);
-            }
-        }
-        res.json(sites);
+        websiteModel
+            .findWebsitesByUser(userId)
+            .then(function (sites) {
+                res.json(sites);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
+
+        // var sites = [];
+        // for (var w in websites) {
+        //     if (userId == websites[w].developerId) {
+        //         sites.push(websites[w]);
+        //     }
+        // }
+        // res.json(sites);
     }
-}
+};
