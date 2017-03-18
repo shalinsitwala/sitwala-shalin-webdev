@@ -6,39 +6,57 @@ module.exports = function (app, model) {
     app.put('/api/website/:websiteId', updateWebsite);
     app.delete('/api/website/:websiteId', deleteWebsite);
 
-    var websites = [
-        {"_id": "123", "name": "Facebook", "developerId": "456", "description": "Lorem"},
-        {"_id": "234", "name": "Tweeter", "developerId": "456", "description": "Lorem"},
-        {"_id": "456", "name": "Gizmodo", "developerId": "456", "description": "Lorem"},
-        {"_id": "567", "name": "Tic Tac Toe", "developerId": "123", "description": "Lorem"},
-        {"_id": "678", "name": "Checkers", "developerId": "123", "description": "Lorem"},
-        {"_id": "789", "name": "Chess", "developerId": "234", "description": "Lorem"}
-    ];
+    // var websites = [
+    //     {"_id": "123", "name": "Facebook", "developerId": "456", "description": "Lorem"},
+    //     {"_id": "234", "name": "Tweeter", "developerId": "456", "description": "Lorem"},
+    //     {"_id": "456", "name": "Gizmodo", "developerId": "456", "description": "Lorem"},
+    //     {"_id": "567", "name": "Tic Tac Toe", "developerId": "123", "description": "Lorem"},
+    //     {"_id": "678", "name": "Checkers", "developerId": "123", "description": "Lorem"},
+    //     {"_id": "789", "name": "Chess", "developerId": "234", "description": "Lorem"}
+    // ];
 
 
     function deleteWebsite(req, res) {
         var websiteId = req.params.websiteId;
-        for (w in websites) {
-            if (websites[w]._id === websiteId) {
-                websites.splice(w, 1);
+        websiteModel
+            .deleteWebsite(websiteId)
+            .then(function (status) {
                 res.sendStatus(200);
-                return;
-            }
-        }
-        res.sendStatus(404);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
+
+
+        // for (w in websites) {
+        //     if (websites[w]._id === websiteId) {
+        //         websites.splice(w, 1);
+        //         res.sendStatus(200);
+        //         return;
+        //     }
+        // }
+        // res.sendStatus(404);
     }
 
     function updateWebsite(req, res) {
         var websiteId = req.params.websiteId;
         var newSite = req.body;
-        for (w in websites) {
-            if (websites[w]._id == websiteId) {
-                websites[w].name = newSite.name;
-                websites[w].description = newSite.description;
-                res.json(websites[w]);
-                return;
-            }
-        }
+
+        websiteModel
+            .updateWebsite(websiteId, newSite)
+            .then(function (newSite) {
+                res.json(newSite);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
+
+        // for (w in websites) {
+        //     if (websites[w]._id == websiteId) {
+        //         websites[w].name = newSite.name;
+        //         websites[w].description = newSite.description;
+        //         res.json(websites[w]);
+        //         return;
+        //     }
+        // }
     }
 
 

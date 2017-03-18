@@ -41,8 +41,6 @@ module.exports = function () {
     }
 
     function updateWebsite(wId, website) {
-        // delete nUser._id;
-
         return websiteModel
             .update({_id: wId}, {
                 $set: website
