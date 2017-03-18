@@ -16,17 +16,20 @@
 
         function login(user) {
             if (!angular.isUndefined(user)) {
+                //entered values
                 var promise = UserService
-                    .findUserByCredentials(user.username, user.password);
-                console.log(user);
-                promise.success(function (user) {
-                    if (user) {
-                        $location.url("/user/" + user._id);
-                    }
-                    else {
-                        vm.error = "User not found";
-                    }
-                });
+                    .findUserByCredentials(user.username, user.password)
+                    .success(function (user) {
+                        if (user) {
+                            $location.url("/user/" + user._id);
+                        }
+                        else {
+                            vm.error = "Invalid username/password";
+                        }
+                    })
+                    .error(function (error) {
+                        vm.error = "Invalid username/password";
+                    })
 
             }
             else {

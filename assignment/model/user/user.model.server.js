@@ -1,5 +1,5 @@
 module.exports = function () {
-    var model = {};
+    var model = null;
     var mongoose = require("mongoose");
     var UserSchema = require("./user.schema.server")();
     var userModel = mongoose.model("userModel", UserSchema);
@@ -25,11 +25,11 @@ module.exports = function () {
     }
 
     function findUserByCredentials(username, password) {
-        return userModel.findOne({username: username, password: password});
+        return userModel.find({username: username, password: password});
     }
 
     function findUserByUsername(username) {
-        return userModel.findOne({username: username});
+        return userModel.find({username: username});
     }
 
     function createUser(user) {

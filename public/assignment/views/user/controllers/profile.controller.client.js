@@ -50,6 +50,9 @@
                     else {
                         vm.error = "Unable to update user";
                     }
+                })
+                .error(function (err) {
+                    vm.error = "Unable to update user";
                 });
         }
     }
