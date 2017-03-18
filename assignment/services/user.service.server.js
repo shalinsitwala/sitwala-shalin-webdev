@@ -1,4 +1,5 @@
-module.exports = function (app) {
+module.exports = function (app, model) {
+    var userModel = model.userModel;
     app.post("/api/user", createUser);
     app.get("/api/user", findUser); // by username and cred
     app.get("/api/user/:userId", findUserById);
@@ -16,9 +17,19 @@ module.exports = function (app) {
 
     function createUser(req, res) {
         var newUser = req.body;
-        newUser._id = (new Date()).getTime() + ""; // the last quote is to convert to string
-        users.push(newUser);
-        res.json(newUser);
+        //newUser._id = (new Date()).getTime() + ""; // the last quote is to convert to string
+        // users.push(newUser);
+        // res.json(newUser);
+
+
+
+        userModel
+            .createUser(newUser)
+            .then(function (newUser) {
+                res.json(newUser);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
     }
 
     function deleteUser(req, res) {
