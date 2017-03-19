@@ -25,21 +25,21 @@ module.exports = function (app, model) {
 
     app.post("/api/upload", upload.single('myFile'), uploadImage);
 
-    var widgets = [
-        {"_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
-        {"_id": "234", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
-        {
-            "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
-            "url": "http://lorempixel.com/400/200/"
-        },
-        {"_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"},
-        {"_id": "567", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
-        {
-            "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
-            "url": "https://youtu.be/AM2Ivdi9c4E"
-        },
-        {"_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
-    ];
+    // var widgets = [
+    //     {"_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
+    //     {"_id": "234", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
+    //     {
+    //         "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
+    //         "url": "http://lorempixel.com/400/200/"
+    //     },
+    //     {"_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"},
+    //     {"_id": "567", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
+    //     {
+    //         "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
+    //         "url": "https://youtu.be/AM2Ivdi9c4E"
+    //     },
+    //     {"_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
+    // ];
 
 
     function sortWidgets(req, res) {
@@ -92,24 +92,6 @@ module.exports = function (app, model) {
 
         }
 
-
-        // var myFile = req.file;
-        //
-        // var originalname = myFile.originalname; // file name on user's computer
-        // // var filename      = myFile.filename;     // new file name in upload folder
-        // var path = myFile.path;         // full path of uploaded file
-        // var destination = myFile.destination;  // folder where file is saved to
-        // var size = myFile.size;
-        // var mimetype = myFile.mimetype;
-        //
-        //
-        // var imageWidget = widgets.find(function (widget) {
-        //     return widget._id == widgetId;
-        // })
-        // imageWidget.width = width;
-        // imageWidget.url = req.protocol + '://' + req.get('host') + "/uploads/" + myFile.filename;
-        // // res.sendStatus(200);
-        // res.redirect("/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
     }
 
     function deleteWidget(req, res) {
@@ -231,7 +213,16 @@ module.exports = function (app, model) {
                 pageId: pageId,
                 text: widget.text
             };
-
+        }
+        else if (widget.type === "TEXT") {
+            var newWidget = {
+                type: widget.type,
+                pageId: pageId,
+                text: widget.text,
+                rows: widget.rows,
+                placeholder: widget.placeholder,
+                formatted: widget.formatted
+            };
         }
 
         widgetModel
