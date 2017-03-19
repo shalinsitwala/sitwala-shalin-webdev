@@ -50,7 +50,15 @@ module.exports = function () {
     }
 
     function deletePage(pid) {
-        return pageModel.remove({_id: pid});
+        return pageModel.findOne({_id: pid}).populate('_website').then(function (page) {
+            page._website.pages.splice(page._website.pages.indexOf(pid), 1);
+            page._website.save();
+            return pageModel.remove({_id: pid});
+        }, function (err) {
+            return err;
+        });
+
+        // return pageModel.remove({_id: pid});
     }
 
     function findPageById(pid) {

@@ -40,6 +40,18 @@ module.exports = function () {
                 });
     }
 
+    function deleteWebsite(wid) {
+        //remove from user's websites array as well.
+        return websiteModel.findOne({_id: wid}).populate('_user').then(function (website) {
+            website._user.websites.splice(website._user.websites.indexOf(wid), 1);
+            website._user.save();
+            return websiteModel.remove({_id: wid});
+        }, function (err) {
+            return err;
+        });
+        // return websiteModel.remove({_id: wid});
+    }
+
     function updateWebsite(wId, website) {
         return websiteModel
             .update({_id: wId}, {
@@ -47,9 +59,6 @@ module.exports = function () {
             });
     }
 
-    function deleteWebsite(wid) {
-        return websiteModel.remove({_id: wid});
-    }
 
     function findWebsiteById(wid) {
         return websiteModel.findById(wid);

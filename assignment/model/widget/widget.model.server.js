@@ -49,7 +49,15 @@ module.exports = function () {
     }
 
     function deleteWidget(wid) {
-        return widgetModel.remove({_id: wid})
+
+        return widgetModel.findOne({_id: wid}).populate('_page').then(function (widget) {
+            widget._page.widgets.splice(widget._page.widgets.indexOf(wid), 1);
+            widget._page.save();
+            return widgetModel.remove({_id: wid});
+        }, function (err) {
+            return err;
+        });
+        // return widgetModel.remove({_id: wid})
     }
 
     function findWidgetById(wid) {
