@@ -29,7 +29,7 @@
 
         function init() {
             vm.getEditorTemplateUrl = getEditorTemplateUrl;
-            console.log("editortemplate url in edit controller " + vm.getEditorTemplateUrl.toString());
+            // console.log("editortemplate url in edit controller " + vm.getEditorTemplateUrl.toString());
             headerSize = WidgetService.headerSize;
             vm.headerSize = headerSize;
             WidgetService
@@ -60,7 +60,11 @@
         }
 
         function getEditorTemplateUrl(type) {
-            return 'views/widget/templates/editors/widget-' + type + '-editor.view.client.html';
+            if (type === undefined) {
+            }
+            else {
+                return 'views/widget/templates/editors/widget-' + type + '-editor.view.client.html';
+            }
         }
 
     }
