@@ -1,13 +1,16 @@
 module.exports = function (app, model) {
 
     var widgetModel = model.widgetModel;
+    var pageModel = model.pageModel;
 
+    // app.put("/api/page/:pageId/widget", sortWidgets);
+    app.post('/api/order/:pageId/widget', sortWidgets);
     app.post('/api/page/:pageId/widget', createWidget);
     app.get('/api/page/:pageId/widget', findWidgetsByPageId);
     app.get('/api/widget/:widgetId', findWidgetById);
     app.put('/api/widget/:widgetId', updateWidget);
     app.delete('/api/widget/:widgetId', deleteWidget);
-    app.put("/api/page/:pageId/widget?initial=initial&final=final", sortWidgets);
+
 
     var multer = require('multer'); // npm install multer --save
 
@@ -41,22 +44,51 @@ module.exports = function (app, model) {
     //     {"_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
     // ];
 
+    // function sortWidgets(req, res) {
+    //     var pageId = req.params.pageId;
+    //     console.log("pageid is: " + pageId);
+    //
+    //     var initial = req.query.initial;
+    //     var final = req.query.final;
+    //
+    //     console.log("intiial is " + initial);
+    //     console.log('final is : ' + final);
+    // }
 
     function sortWidgets(req, res) {
         var pageId = req.params.pageId;
         var initial = req.query.initial;
         var final = req.query.final;
 
-        var widg = [];
-        for (var w in widgets) {
-            if (pageId === widgets[w].pageId) {
-                widg.push(widgets[w]);
-            }
-        }
-        widgets.splice(final, 0, widgets[initial]);
-        widgets.splice(initial, 1);
+        pageModel
+            .reorderWidgets(pageId, initial, final)
+            .then(function (stats) {
+                res.send(200);
+            }, function (err) {
+                res.send(400);
+            });
 
-        res.json(widgets);
+
+        res.send(200);
+    }
+
+    function deleteWidget(req, res) {
+        var widgetId = req.params.widgetId;
+        widgetModel
+            .deleteWidget(widgetId)
+            .then(function (stats) {
+                res.sendStatus(200);
+            }, function (err) {
+                res.sendStatus(400).send(err);
+            });
+        // for (var w in widgets) {
+        //     if (widgets[w]._id === widgetId) {
+        //         widgets.splice(w, 1);
+        //         res.sendStatus(200);
+        //         return;
+        //     }
+        // }
+        // res.sendStatus(404);
     }
 
     function uploadImage(req, res) {
@@ -94,24 +126,7 @@ module.exports = function (app, model) {
 
     }
 
-    function deleteWidget(req, res) {
-        var widgetId = req.params.widgetId;
-        widgetModel
-            .deleteWidget(widgetId)
-            .then(function (stats) {
-                res.sendStatus(200);
-            }, function (err) {
-                res.sendStatus(400).send(err);
-            });
-        // for (var w in widgets) {
-        //     if (widgets[w]._id === widgetId) {
-        //         widgets.splice(w, 1);
-        //         res.sendStatus(200);
-        //         return;
-        //     }
-        // }
-        // res.sendStatus(404);
-    }
+
 
     function updateWidget(req, res) {
         var widgetId = req.params.widgetId;

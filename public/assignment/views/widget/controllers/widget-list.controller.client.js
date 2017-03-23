@@ -32,8 +32,25 @@
 
                 });
 
+            var startIndex = -1;
+            var endIndex = -1;
+
             $('#widget-list').sortable({
-                axis: "y"
+                axis: "y",
+                start: function (event, ui) {
+                    startIndex = ui.item.index();
+                },
+                stop: function (event, ui) {
+                    endIndex = ui.item.index();
+                    console.log([startIndex, endIndex]);
+                    WidgetService
+                        .sortWidgetList(vm.pageId, startIndex, endIndex)
+                        .success(function (widgets) {
+                            // console.log("Updated");
+                            // Order updated in Page -> widgets array
+                            
+                        })
+                }
             });
         }
 

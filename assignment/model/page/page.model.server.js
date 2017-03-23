@@ -10,6 +10,7 @@ module.exports = function () {
         findPageById: findPageById,
         updatePage: updatePage,
         deletePage: deletePage,
+        reorderWidgets: reorderWidgets,
         setModel: setModel
     };
 
@@ -17,6 +18,21 @@ module.exports = function () {
 
     function setModel(_model) {
         model = _model;
+    }
+
+    function reorderWidgets(pageId, start, end) {
+        // console.log("page is " + pageId + " start is " + start + " end is " + end);
+        // return pageModel.find({
+        //     "_website": "58d325579ac69d216c06a48f"
+        // });
+
+        return pageModel.findById(pageId, function (err, page) {
+
+            page.widgets.splice(end, 0, page.widgets.splice(start, 1)[0]);
+            page.save();
+
+        })
+
     }
 
     function createPage(websiteId, page) {

@@ -53,7 +53,8 @@
 
 
         function sortWidgetList(pageId, initial, final) {
-            return $http.put("/api/page/" + pageId + "/widget?initial=" + initial + "&final=" + final);
+            // return $http.post('/api/page/' + pageId + '/widget?initial=' + initial + '&final=' + final);
+            return $http.post('/api/order/' + pageId+'/widget?initial=' + initial + '&final=' + final);
         }
     }
 })();
