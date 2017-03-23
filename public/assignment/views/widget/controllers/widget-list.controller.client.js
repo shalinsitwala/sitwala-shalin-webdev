@@ -42,13 +42,12 @@
                 },
                 stop: function (event, ui) {
                     endIndex = ui.item.index();
-                    console.log([startIndex, endIndex]);
                     WidgetService
                         .sortWidgetList(vm.pageId, startIndex, endIndex)
                         .success(function (widgets) {
                             // console.log("Updated");
                             // Order updated in Page -> widgets array
-                            
+
                         })
                 }
             });

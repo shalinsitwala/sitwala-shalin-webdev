@@ -127,7 +127,6 @@ module.exports = function (app, model) {
     }
 
 
-
     function updateWidget(req, res) {
         var widgetId = req.params.widgetId;
         var widget = req.body;
@@ -179,6 +178,58 @@ module.exports = function (app, model) {
 
     function findWidgetsByPageId(req, res) {
         var pageId = req.params.pageId;
+        var orderedWidgets = [];
+
+
+        // pageModel
+        //     .findPageById(pageId)
+        //     .then(function (page) {
+        //
+        //         for (i = 0; i < page.widgets.length; i++) {
+        //             console.log("outside model i is" + i );
+        //             widgetModel
+        //                 .findWidgetById(page.widgets[i])
+        //                 .then(function (widget) {
+        //                     console.log("i is " + i);
+        //                     console.log("page.widgets.length"  + page.widgets.length);
+        //                     console.log("widget is " + widget);
+        //                     // orderedWidgets.push(widget);
+        //
+        //
+        //                 }, function (err) {
+        //                     console.log(err);
+        //                 });
+        //
+        //
+        //         }
+
+                // page.widgets.forEach(function (item, index) {
+                //
+                //     widgetModel
+                //         .findWidgetById(item)
+                //         .then(function (widget) {
+                //
+                //             orderedWidgets.push(widget);
+                //             console.log("index is " + index);
+                //             console.log("len is " + page.widgets.length);
+                //             if (orderedWidgets.length == page.widgets.length) {
+                //                 //all items traversed then return
+                //                 res.send(orderedWidgets);
+                //             }
+                //
+                //         }, function (err) {
+                //             console.log(error);
+                //         })
+                //
+                // });
+
+
+                // res.json(widgets);
+            // }, function (err) {
+            //     res.sendStatus(400).send(err);
+            // });
+
+
         widgetModel
             .findAllWidgetsForPage(pageId)
             .then(function (widgets) {
@@ -187,14 +238,6 @@ module.exports = function (app, model) {
                 res.sendStatus(400).send(err);
             });
 
-
-        // var rwidgets = [];
-        // for (w in widgets) {
-        //     if (widgets[w].pageId === pageId) {
-        //         rwidgets.push(widgets[w]);
-        //     }
-        // }
-        // res.json(rwidgets);
     }
 
 
